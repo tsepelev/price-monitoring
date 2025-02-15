@@ -1,22 +1,45 @@
 <!DOCTYPE html>
 <html>
-<head>
-    <link
-  rel="stylesheet"
-  href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css"
->
-    <title>Моё приложение</title>
-</head>
-<body>
+  <head>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css" />
+    <title>Поиск по Google товарам</title>
+  </head>
+
+  <body>
     <div class="container">
-        <form>
-  <fieldset role="group">
-    <input name="email" type="email" placeholder="Enter your email" autocomplete="email" />
-    <input type="submit" value="Subscribe" />
-  </fieldset>
-</form>
-        <h1>Привет, Мир!</h1>
-        {{ content }}
+      <form method="get">
+        <fieldset role="group">
+          <input name="q" type="text" placeholder="Введите товар" value="{{ request.args.q }}" autocomplete="email" />
+          <input type="submit" />
+        </fieldset>
+      </form>
+      <div>
+        <table class="striped">
+          <thead>
+            <tr>
+              <th scope="col">Фото</th>
+              <th scope="col">Наименование</th>
+              <th scope="col">Поставщик</th>
+              <th scope="col">Цена</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for item in content.shopping_results %}
+              <tr>
+                <th scope="row">
+                  <image width="50px" src="{{ item.thumbnail }}" />
+                </th>
+                <td>
+                  <a href="{{ item.link }}" target="_blank">{{ item.title }}</a>
+                  <p><small>{{ item.offers }}</small></p>
+                </td>
+                <td>{{ item.seller }}</td>
+                <td>{{ item.price }}</td>
+              </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
     </div>
-</body>
-</html> 
+  </body>
+</html>
