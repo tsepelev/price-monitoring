@@ -25,6 +25,7 @@ def index():
         response = requests.get(
             url,
             params=params,
+            timeout=10
         )
         # response = requests.get(
         #     url="https://www.searchapi.io/api/v1/searches/search_6d97LXP4moruanBXWk03EOrl"
@@ -35,4 +36,4 @@ def index():
 
 
 if __name__ == "__main__":
-    app.run(debug=os.environ.get("DEBUG", False))
+    app.run(debug=bool(os.environ.get("DEBUG", False)))
