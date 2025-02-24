@@ -1,3 +1,5 @@
+"""Simple Flask application for searching products using searchapi.io."""
+
 import os
 
 import requests
@@ -10,6 +12,7 @@ app = Flask(__name__)
 
 @app.route("/")
 def index():
+    """Main page with search form."""
     query = request.args.get("q")
     url = "https://www.searchapi.io/api/v1/search"
     params = {
@@ -22,11 +25,7 @@ def index():
     }
     resp = ""
     if query:
-        response = requests.get(
-            url,
-            params=params,
-            timeout=10
-        )
+        response = requests.get(url, params=params, timeout=10)
         # response = requests.get(
         #     url="https://www.searchapi.io/api/v1/searches/search_6d97LXP4moruanBXWk03EOrl"
         # )
@@ -36,4 +35,5 @@ def index():
 
 
 if __name__ == "__main__":
+    """Run the Flask application."""
     app.run(debug=bool(os.environ.get("DEBUG", False)))
