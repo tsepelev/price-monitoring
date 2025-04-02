@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="my-4">
+  <h3>{{ content.product.title }}"</h3>
+</div>
+  <table class="table table-hover">
+    <thead>
+      <tr>
+        <th scope="col">Поставщик</th>
+        <th scope="col">Цена</th>
+        <th scope="col"></th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for item in content.offers %}
+        <tr>
+          <td>
+            <a href="{{ item.link }}">{{ item.merchant.name }}</a>
+          </td>
+          <td>
+            <p class="fw-bold">{{ item.price }}</p>
+          </td>
+          <td>
+            <a href="{{ item.link }}" class="btn btn-sm btn-outline-success" target="_blank">Открыть сайт</a>
+          </td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+{% endblock %}

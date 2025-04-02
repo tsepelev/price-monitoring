@@ -12,3 +12,4 @@ wheels/
 .idea
 .mypy_cache
 uv.lock
+.env
