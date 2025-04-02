@@ -80,7 +80,7 @@ def search_products(
     try:
         response = requests.get(SEARCH_API_URL, params=params, timeout=DEFAULT_TIMEOUT)
         response.raise_for_status()  # Вызывает исключение для HTTP-ошибок
-        print(response.url)
+        # print(response.url)
         return response.json()
     except requests.exceptions.RequestException as e:
         logger.error(f"API request failed: {str(e)}")
@@ -115,7 +115,7 @@ def product(product_id):
         if product_id
         else {}
     )
-    print(result)
+    # print(result)
     return render_template("products.html", content=result, searches=searches)
 
 
