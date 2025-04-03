@@ -1,38 +1,38 @@
-{% extends "base.html" %}
+{% extends 'base.html' %}
 {% block content %}
-<div class="container mt-4">
-  <table class="table table-hover table-striped">
-    <thead class="thead-dark">
-      <tr>
-        <th scope="col">Фото</th>
-        <th scope="col">Наименование</th>
-        <th scope="col">Поставщик</th>
-        <th scope="col">Цена</th>
-      </tr>
-    </thead>
-    <tbody>
-      {% for item in content.shopping_results %}
-      <tr>
-        <td>
-          <img class="img-thumbnail" style="max-width:100px; max-height:100px" src="{{ item.thumbnail }}" alt="Product Image" />
-        </td>
-        <td>
-          <p>
-            <a href="{{ item.link }}" class="fw-semibold" target="_blank">{{ item.title }}</a>
-          </p>
-          <p>
-            {% if item.offers %}
-            <a href="/product/{{ item.product_id }}" class="btn btn-sm btn-outline-success">{{ item.offers }}</a>
-            {% endif %}
-          </p>
-        </td>
-        <td>{{ item.seller }}</td>
-        <td>
-          <p class="fw-bold">{{ item.price }}</p>
-        </td>
-      </tr>
-      {% endfor %}
-    </tbody>
-  </table>
-</div>
-{% endblock content %}
+  <div class="container mt-4">
+    <table class="table table-hover table-striped">
+      <thead class="thead-dark">
+        <tr>
+          <th scope="col">Фото</th>
+          <th scope="col">Наименование</th>
+          <th scope="col">Поставщик</th>
+          <th scope="col">Цена</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for item in content.shopping_results %}
+          <tr>
+            <td>
+              <img class="img-thumbnail" style="max-width:100px; max-height:100px" src="{{ item.thumbnail }}" alt="Product Image" />
+            </td>
+            <td>
+              <p>
+                <a href="{{ item.link }}" class="fw-semibold" target="_blank">{{ item.title }}</a>
+              </p>
+              <p>
+                {% if item.offers %}
+                  <a href="/product/{{ item.product_id }}" class="btn btn-sm btn-outline-success">{{ item.offers }}</a>
+                {% endif %}
+              </p>
+            </td>
+            <td>{{ item.seller }}</td>
+            <td>
+              <p class="fw-bold">{{ item.price }}</p>
+            </td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+{% endblock %}
