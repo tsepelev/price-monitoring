@@ -118,7 +118,7 @@ async def search_products(
         language: Язык результатов
         country: Страна для поиска
         product_id: ID продукта
-        time_period: Этот параметр ограничивает результаты URL-адресами на основе даты. 
+        time_period: Этот параметр ограничивает результаты URL-адресами на основе даты.
         engine: Поисковый движок
         num: Количество результатов
 
@@ -217,8 +217,11 @@ async def search_detail(request: Request, q: str) -> HTMLResponse:
         )
 
     result = await search_products(
-        query=q + " купить",
+        query=f"{q} купить цена",
         engine="google",
+        location="Moscow",
+        language="ru",
+        country="ru"
     )
     # Фильтруем результаты, оставляя только те, где есть цена
     if "organic_results" in result:

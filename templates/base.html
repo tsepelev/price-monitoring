@@ -36,11 +36,11 @@
           <li class="nav-item">
             <a class="nav-link {% if 'search' not in request.path %}active fw-bold{% endif %}"
                aria-current="page"
-               href="/?q={{ request.query_params.get('q', '') }}">Google покупки</a>
+               {% if 'search' in request.path %}href="/?q={{ request.query_params.get('q', '') }}"{% endif %}>Google покупки</a>
           </li>
           <li class="nav-item">
             <a class="nav-link {% if 'search' in request.path %}active fw-bold{% endif %}"
-               href="/search?q={{ request.query_params.get('q', '') }}">Google поиск</a>
+               {% if 'search' not in request.path %}href="/search?q={{ request.query_params.get('q', '') }}"{% endif %}>Google поиск</a>
           </li>
         </ul>
         {% block content %}
