@@ -1,3 +1,4 @@
+"""Модуль для поиска и мониторинга цен товаров через API."""
 # Standard library imports
 import logging
 import os
@@ -75,14 +76,21 @@ def extract_price(extensions: list) -> float | None:
 
 
 def ttl_cache(func):
-    """Декоратор для кэширования результатов функции с TTL."""
+    """Декоратор для кэширования результатов функции с TTL.
+
+    Args:
+        func: Функция для кэширования
+
+    Returns:
+        Обёрнутая функция с кэшированием
+    """
 
     @wraps(func)
     async def wrapper(*args, **kwargs):
-        key = str(args) + str(kwargs)
+        # Создаем ключ из всех аргументов
+        key = f"{func.__name__}:{str(args)}:{str(sorted(kwargs.items()))}"
         cached_result = cache.get(key)
 
-        # Проверяем, что кэшированный результат не пустой
         if (
             cached_result
             and isinstance(cached_result, dict)
@@ -91,7 +99,6 @@ def ttl_cache(func):
             return cached_result
 
         result = await func(*args, **kwargs)
-        # Кэшируем только если результат не пустой
         if result and isinstance(result, dict) and result.get("organic_results"):
             cache[key] = result
         return result
@@ -233,7 +240,7 @@ async def search_detail(request: Request, q: str) -> HTMLResponse:
 
 
 @app.exception_handler(404)
-async def not_found_handler(request: Request, exc: Exception) -> HTMLResponse:
+async def not_found_handler(request: Request, _exc: Exception) -> HTMLResponse:
     """Обработчик 404 ошибки."""
     return templates.TemplateResponse("404.html", {"request": request}, status_code=404)
 
@@ -253,22 +260,20 @@ if __name__ == "__main__":
     required_env_vars = ["SEARCH_API_KEY"]
     missing_vars = [var for var in required_env_vars if not os.getenv(var)]
     if missing_vars:
-        logger.critical(
-            f"Missing required environment variables: {', '.join(missing_vars)}"
-        )
+        logger.critical("Missing required environment variables: %s", ', '.join(missing_vars))
         raise SystemExit(1)
 
     # Получение конфигурации
     host = os.getenv("HOST", "0.0.0.0")
-    port = int(os.getenv("PORT", 8000))
+    port = int(os.getenv("PORT", "8000"))
     debug = os.getenv("DEBUG", "false").lower() in ("1", "true", "yes")
 
     # Логирование параметров запуска
-    logger.info(f"Starting application on {host}:{port}")
-    logger.info(f"Debug mode: {debug}")
+    logger.info("Starting application on %s:%s", host, port)
+    logger.info("Debug mode: %s", debug)
 
     try:
         uvicorn.run("main:app", host=host, port=port, reload=debug)
     except Exception as e:
-        logger.critical(f"Failed to start application: {e}")
-        raise SystemExit(1)
+        logger.critical("Failed to start application: %s", e)
+        raise SystemExit(1) from e
