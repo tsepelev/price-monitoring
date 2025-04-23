@@ -219,9 +219,6 @@ async def search_detail(request: Request, q: str) -> HTMLResponse:
     result = await search_products(
         query=f"{q} купить цена",
         engine="google",
-        location="Moscow",
-        language="ru",
-        country="ru"
     )
     # Фильтруем результаты, оставляя только те, где есть цена
     if "organic_results" in result:
