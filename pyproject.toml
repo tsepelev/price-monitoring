@@ -14,5 +14,7 @@ dependencies = [
 [dependency-groups]
 dev = [
     "black>=25.1.0",
+    "djlint>=1.36.4",
     "isort>=6.0.0",
+    "pylint>=3.3.6",
 ]

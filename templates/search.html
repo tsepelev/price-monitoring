@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% block content %}
+  <div class="container border border-top-0">
+    <table class="table table-hover table-striped">
+      <thead class="thead-dark">
+        <tr>
+          <th scope="col">Наименование</th>
+          <th scope="col">Поставщик</th>
+          <th scope="col">Цена</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for item in content.organic_results %}
+          <tr>
+            <td>
+              <p>
+                <a href="{{ item.link }}" class="fw-semibold" target="_blank">{{ item.title }}</a>
+              </p>
+              <p>{{ item.snippet }}</p>
+            </td>
+            <td width="250px">{{ item.domain }}</td>
+            <td width="150px">
+              <p class="fw-bold">{{ item.formatted_price }}</p>
+            </td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+{% endblock %}
