@@ -1,4 +1,5 @@
 """Модуль для поиска и мониторинга цен товаров через API."""
+
 # Standard library imports
 import logging
 import os
@@ -260,7 +261,9 @@ if __name__ == "__main__":
     required_env_vars = ["SEARCH_API_KEY"]
     missing_vars = [var for var in required_env_vars if not os.getenv(var)]
     if missing_vars:
-        logger.critical("Missing required environment variables: %s", ', '.join(missing_vars))
+        logger.critical(
+            "Missing required environment variables: %s", ", ".join(missing_vars)
+        )
         raise SystemExit(1)
 
     # Получение конфигурации
