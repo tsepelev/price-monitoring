@@ -2,6 +2,9 @@
 
 Веб-приложение для отслеживания цен на товары через Google Shopping. Построено с использованием FastAPI и SearchAPI.io.
 
+![./img/shopping.png]
+![./img/search.png]
+
 ## Функциональности
 
 - Поиск товаров через Google Shopping
@@ -22,17 +25,20 @@
 ## Установка
 
 1. Клонируйте репозиторий:
+
 ```bash
 git clone [url-репозитория]
 cd price-monitoring
 ```
 
 2. Установите зависимости:
+
 ```bash
 pip install -r requirements.txt
 ```
 
 3. Создайте файл `.env` в корневой директории:
+
 ```env
 SEARCH_API_KEY=ваш_ключ_api
 HOST=0.0.0.0
