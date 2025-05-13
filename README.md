@@ -2,8 +2,8 @@
 
 Веб-приложение для отслеживания цен на товары через Google Shopping. Построено с использованием FastAPI и SearchAPI.io.
 
-![./img/shopping.png]
-![./img/search.png]
+![Google Shopping](https://github.com/tsepelev/price-monitoring/blob/master/img/shopping.png?raw=true)
+![Google Search](https://github.com/tsepelev/price-monitoring/blob/master/img/search.png?raw=true)
 
 ## Функциональности
 
